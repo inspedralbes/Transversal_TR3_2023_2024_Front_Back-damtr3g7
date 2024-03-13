@@ -7,6 +7,7 @@ i:healthbar.png:healthbar-39aaa7fd4bbd4e4c488c07a00c0e9f9d.png:130108:image/png:
 d:pink_monster:pink_monster:0:application/unknown:1
 i:pink_monster/Double_Jump_Dust_5.png:pink_monster/Double_Jump_Dust_5-36911708e5f701903d234634f9cd4272.png:1094:image/png:1
 i:pink_monster/Pink_Monster.png:pink_monster/Pink_Monster-2031ef70eb5a2794a9b0f93bb81e7d23.png:1121:image/png:1
+i:pink_monster/Pink_Monster2.png:pink_monster/Pink_Monster2-df66e0bf01ae2dcba2a21f2cf4d70492.png:488:image/png:1
 i:pink_monster/Pink_Monster_Attack1_4.png:pink_monster/Pink_Monster_Attack1_4-0ebc9af19a9714e5d83eae308bc20d5d.png:1392:image/png:1
 i:pink_monster/Pink_Monster_Attack2_6.png:pink_monster/Pink_Monster_Attack2_6-9596e2e9462adf564f9996d94f54f839.png:1509:image/png:1
 i:pink_monster/Pink_Monster_Climb_4.png:pink_monster/Pink_Monster_Climb_4-acc792ba866d88b34a4409430c379cb7.png:1307:image/png:1
