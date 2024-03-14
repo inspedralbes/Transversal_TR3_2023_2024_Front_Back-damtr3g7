@@ -1,8 +1,24 @@
-import { createPinia } from 'pinia';
+import { createStore } from "zustand/vanilla";
+import { persist } from "zustand/middleware";
 
-export function setupStore() {
-  const pinia = createPinia();
-  // Aquí puedes instalar tus tiendas
-  // const appStore = useAppStore(pinia);
-  return { pinia };
-}
+const useCountStore = createStore(
+  persist(
+    (set) => ({
+      usuari: {
+        nom: "Pepito",
+        cognom: "Grillo",
+        email: "pepito@gmail.com",
+        id: null,
+        avatar: 0,
+        classe: '',
+      },
+    }),
+    {
+      name: 'countStore', // nombre único para el almacenamiento local
+    }
+  )
+);
+
+export const { getState, setState, subscribe } = useCountStore;
+
+export default useCountStore;
