@@ -9,7 +9,7 @@ export default {
       errorCode: false,
       errorText: "",
       proveSala: false,
-      store: useAppStore(),
+      // store: useAppStore(),
       codi: "",
     };
   },
@@ -21,11 +21,11 @@ export default {
       for (let i = 0; i < inputs.length; i++) {
         this.codi += inputs[i].value.toString();
       }
-      this.store.usuari.classe = "";
+      // this.store.usuari.classe = "";
       socket.emit("joinSala", {
         codi: this.codi,
-        username: this.store.usuari.nom,
-        idAvatar: this.store.usuari.avatar,
+        // username: this.store.usuari.nom,
+        // idAvatar: this.store.usuari.avatar,
       });
     },
     async pasteCode() {
@@ -61,7 +61,7 @@ export default {
         this.proveSala = false;
         state.joinedSala = null;
       } else if (nuevoValor != null && nuevoValor != false && this.codi != "") {
-        await joinClasse(this.setSala.id_classe, this.store.usuari.id);
+        // await joinClasse(this.setSala.id_classe, this.store.usuari.id);
         this.$router.push('/sala');
       }
       this.codi = "";
@@ -73,7 +73,7 @@ export default {
     },
   },
   mounted() {
-    this.store.usuari.id == null ? this.$router.push("/inici") : null;
+    // this.store.usuari.id == null ? this.$router.push("/inici") : null;
     const form = document.querySelector("form");
     const inputs = form.querySelectorAll("input");
     const KEYBOARDS = {
@@ -104,8 +104,7 @@ export default {
       }
     }
 
-    function handlePaste(e) {
-      e.preventDefault();
+    function handlePaste() {
       const paste = e.clipboardData.getData("text");
       inputs.forEach((input, i) => {
         if (
@@ -176,18 +175,18 @@ export default {
 </script>
 
 <template>
-  <div class="full-container">
-    <div class="center-container">
-      <v-card class="pa-10 bg-grey-lighten-5 elevation-5 rounded-xl">
-        <h1 class="title">UNEIX-TE</h1>
-        <form @submit.prevent="">
-          <div class="d-flex my-3">
-            <input type="text" maxlength="1" class="form-control" />
-            <input type="text" maxlength="1" class="form-control" />
-            <input type="text" maxlength="1" class="form-control" />
-            <input type="text" maxlength="1" class="form-control" />
-            <input type="text" maxlength="1" class="form-control" />
-            <input type="text" maxlength="1" class="form-control" />
+  <div class="h-screen flex justify-center bg-[#add8e6]">
+    <div class="flex flex-col items-center justify-center gap-4">
+      <div class="p-10 bg-gray-100 shadow-xl rounded-2xl">
+        <h1 class="text-4xl font-bold mb-6 text-center">UNEIX-TE</h1>
+        <form @submit.prevent>
+          <div class="flex my-3">
+            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1" class="block w-12 h-14 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
             <div class="paste-btn-container">
               <button class="paste-btn" @click="() => pasteCode()">
                 <svg fill="black" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
@@ -198,26 +197,15 @@ export default {
               </button>
             </div>
           </div>
-          <v-snackbar v-model="errorCode" :timeout="3000" color="error" class="text-center">
-            {{ errorText }}
-            <template v-slot:actions>
-              <v-btn color="white" variant="text" @click="errorCode = false">
-                <svg fill="white" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18">
-                  <path
-                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                </svg>
-              </v-btn>
-            </template>
-          </v-snackbar>
-
-          <div class="btn-container">
+          <div class="mt-3 text-center">
             <button class="btn" @click="onSubmit">JUGAR</button>
           </div>
-
-          <v-sheet clickable class="text-center mt-3 linkClasses font-weight-bold pt-3 text-decoration-underline"
-            style="background-color: transparent" @click="$router.push('/classes')">Crea una sala</v-sheet>
         </form>
-      </v-card>
+
+        <div class="text-center mt-3 font-bold">
+          <a href="/classes" class="text-blue-500 hover:underline">Crea una sala</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -234,35 +222,8 @@ export default {
   font-size: 42px;
 }
 
-.full-container {
-  background-color: lightblue;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.center-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
 .logo {
   margin-bottom: 4px;
-}
-
-.form-control {
-  display: block;
-  width: 48px;
-  height: 60px;
-  margin-right: 0.5rem;
-  text-align: center;
-  font-size: 1.25rem;
-  min-width: 0;
-  border: 1.5px solid lightgrey;
-  outline: none;
 }
 
 .form-control:active {
@@ -277,10 +238,6 @@ export default {
 
 .form-control:focus {
   border: 2px solid lightgrey;
-}
-
-.form-control:last-child {
-  margin-right: 0;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

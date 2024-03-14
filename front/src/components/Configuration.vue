@@ -126,13 +126,13 @@ export default {
     methods: {
         logout() {
 
-            let store = useAppStore();
-            store.usuari = {
-                nom: "",
-                cognom: "",
-                email: "",
-                avatar: null,
-            };
+            // let store = useAppStore();
+            // store.usuari = {
+            //     nom: "",
+            //     cognom: "",
+            //     email: "",
+            //     avatar: null,
+            // };
 
         },
         checkPassword() {
@@ -180,8 +180,8 @@ export default {
         },
         handleAvatarClick(avatarId) {
             this.avatar = avatarId;
-            let store = useAppStore();
-            store.usuari.avatar = this.avatar;
+            // let store = useAppStore();
+            // store.usuari.avatar = this.avatar;
             this.avatarModal = false;
         },
         handleMouseEnter(event) {
@@ -197,8 +197,8 @@ export default {
         async cambiarContrasena() {
 
             console.log("Dentro")
-            let store = useAppStore();
-            let email = store.usuari.email;
+            // let store = useAppStore();
+            // let email = store.usuari.email;
 
             let response = await fetch(import.meta.env.VITE_NODE_ROUTE + "/changePassword", {
                 method: "POST",
@@ -222,11 +222,11 @@ export default {
             }
         }
     }, mounted() {
-        let store = useAppStore();
-        this.name = store.usuari.nom;
-        this.surname = store.usuari.cognom;
-        this.email = store.usuari.email;
-        this.avatar = store.usuari.avatar;
+        // let store = useAppStore();
+        // this.name = store.usuari.nom;
+        // this.surname = store.usuari.cognom;
+        // this.email = store.usuari.email;
+        // this.avatar = store.usuari.avatar;
     }
 }
 
