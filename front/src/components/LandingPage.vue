@@ -4,27 +4,22 @@
       <img
         src="../assets/MathBattleLogo.png"
         alt="Math Battle Logo"
-        class="logo drop-shadow-xl w-3/4"
+        class="logo drop-shadow-xl w-3/4 aspect-auto"
       />
-      <a>
-        <button
-          class="button-landing"
-          @click="$router.push(state.usuari.id == null ? '/inici' : '/join')"
-        >
-          COMENÇAR
-        </button>
+      <a :href="state.usuari.id == null ? '/login' : '/join'">
+        <button class="button-landing">COMENÇAR</button>
       </a>
     </div>
   </div>
 </template>
 
 <script>
-import { setupStore } from "../store/store.js";
+import { getState, setState, subscribe } from "../store/store.js";
 
 export default {
   data() {
     return {
-      state: setupStore(),
+      state: getState(),
     };
   },
 };
@@ -106,5 +101,3 @@ export default {
   border-right: 3px solid #fff;
 }
 </style>
-
-<script setup></script>
