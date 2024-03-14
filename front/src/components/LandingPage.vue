@@ -1,23 +1,25 @@
 <template>
-  <div class="full-container">
-    <div class="center-container">
+  <div class="h-screen flex justify-center bg-[#add8e6]">
+    <div class="flex flex-col items-center justify-center gap-4">
       <img
         src="../assets/MathBattleLogo.png"
         alt="Math Battle Logo"
-        class="logo drop-shadow-2xl "
+        class="logo drop-shadow-xl w-3/4"
       />
-      <button
-        class="button-landing"
-        @click="$router.push(state.usuari.id == null ? '/inici' : '/join')"
-      >
-        COMENÇAR
-      </button>
+      <a>
+        <button
+          class="button-landing"
+          @click="$router.push(state.usuari.id == null ? '/inici' : '/join')"
+        >
+          COMENÇAR
+        </button>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
-import { setupStore } from '../store/store.js';
+import { setupStore } from "../store/store.js";
 
 export default {
   data() {
@@ -29,26 +31,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  background-color: lightblue;
-}
-
-.full-container {
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.center-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-}
-
 .logo {
   animation: moveAndRotate 3s infinite ease-in-out;
 }
