@@ -1,51 +1,51 @@
 <template>
     <div class="full-container">
-        <v-row class="d-flex justify-center align-center">
-            <v-col cols="12" sm="8">
-                <v-card class="rounded-xl elevation-6">
-                    <v-row>
-                        <v-col cols="6" class=" pl-10 py-10">
+        <div class="d-flex justify-center align-center">
+            <div divs="12" sm="8">
+                <div class="rounded-xl elevation-6">
+                    <div>
+                        <div divs="6" class=" pl-10 py-10">
                             <h2 class="my-2 text-center">Registra't</h2>
-                            <v-form @submit.prevent="register" class="mr-6">
+                            <form @submit.prevent="register" class="mr-6">
                                 <div class="name-field">
-                                    <v-text-field v-model="emailRegistration.name" :rules="emailRegistration.nameRules"
-                                        label="Nom*" type="name" class="pr-6" required></v-text-field>
-                                    <v-text-field v-model="emailRegistration.surname" :rules="emailRegistration.nameRules"
-                                        label="Cognom*" type="cognom" required></v-text-field>
+                                    <input model="emailRegistration.name" :rules="emailRegistration.nameRules"
+                                        label="Nom*" type="name" class="pr-6" required></input>
+                                    <input model="emailRegistration.surname" :rules="emailRegistration.nameRules"
+                                        label="Cognom*" type="cognom" required></input>
                                 </div>
-                                <v-text-field v-model="emailRegistration.email" :rules="emailRegistration.emailRules"
-                                    label="Email*" type="email" required></v-text-field>
+                                <input model="emailRegistration.email" :rules="emailRegistration.emailRules"
+                                    label="Email*" type="email" required></input>
 
-                                <v-text-field v-model="emailRegistration.password"
+                                <input model="emailRegistration.password"
                                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                     :rules="emailRegistration.passwordRules" :type="show1 ? 'text' : 'password'"
                                     name="input-10-1" label="Contrassenya*" @click:append="show1 = !show1"
-                                    required></v-text-field>
+                                    required></input>
                                 <div class="name-field">
-                                    <v-checkbox id="profeRegistro" type="checkbox" label="Soc professor/a"></v-checkbox>
+                                    <checkbox id="profeRegistro" type="checkbox" label="Soc professor/a"></checkbox>
                                 </div>
-                                <v-btn id="btnSubmit" type="submit" color="primary">Registra't</v-btn>
-                            </v-form>
-                        </v-col>
-                        <v-col cols="6" class="container-right pr-10 py-10">
+                                <btn id="btnSubmit" type="submit" divor="primary">Registra't</btn>
+                            </form>
+                        </div>
+                        <div divs="6" class="container-right pr-10 py-10">
                             <h2 class="my-2 ml-6 text-center">Inicia sessió</h2>
-                            <v-form @submit.prevent="login" class="ml-6">
-                                <v-text-field v-model="usernameLogin.email" :rules="emailRegistration.emailRules"
-                                    label="Email*" type="email" required></v-text-field>
-                                <v-text-field v-model="usernameLogin.password"
+                            <form @submit.prevent="login" class="ml-6">
+                                <input model="usernameLogin.email" :rules="emailRegistration.emailRules"
+                                    label="Email*" type="email" required></input>
+                                <input model="usernameLogin.password"
                                     :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                                     :rules="emailRegistration.passwordRules" :type="show2 ? 'text' : 'password'"
                                     name="input-10-1" label="Contrassenya*" @click:append="show2 = !show2"
-                                    required></v-text-field>
-                                <v-checkbox type="checkbox" id="profeLogin" label="Soc professor/a"></v-checkbox>
-                                <v-btn type="submit" color="primary">Inicia sessió</v-btn>
+                                    required></input>
+                                <checkbox type="checkbox" id="profeLogin" label="Soc professor/a"></checkbox>
+                                <btn type="submit" divor="primary">Inicia sessió</btn>
 
-                            </v-form>
-                        </v-col>
-                    </v-row>
-                </v-card>
-            </v-col>
-        </v-row>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -159,7 +159,7 @@ export default {
 }
 
 .full-container {
-    background-color: lightblue;
+    background-divor: lightblue;
     height: 100vh;
     margin: 0;
     display: flex;
@@ -168,7 +168,7 @@ export default {
 }
 
 .container-right {
-    /* background-color: #72BAE8; */
+    /* background-divor: #72BAE8; */
     width: 100%;
     background-image: url("../assets/Background.png");
 
