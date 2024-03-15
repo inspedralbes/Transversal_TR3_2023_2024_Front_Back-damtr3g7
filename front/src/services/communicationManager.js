@@ -1,17 +1,19 @@
+const NODE = import.meta.env.PUBLIC_NODE;
+
 export function register(emailRegistration) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + '/register', {
-      method: 'POST',
+    fetch(NODE + "/register", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         nom: emailRegistration.name,
-        cognom: emailRegistration.surname,
         email: emailRegistration.email,
         password: emailRegistration.password,
       }),
-    }).then((response) => response.json())
+    })
+      .then((response) => response.json())
       .then((data) => {
         resolve(data);
       });
@@ -20,17 +22,19 @@ export function register(emailRegistration) {
 
 export function login(usernameLogin) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + '/login', {
-      method: 'POST',
+    fetch(NODE + "/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: usernameLogin.email,
         password: usernameLogin.password,
       }),
-    }).then((response) => response.json())
+    })
+      .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         resolve(data);
       });
   });
@@ -38,35 +42,33 @@ export function login(usernameLogin) {
 
 export function getClassesFetch(idPropietari) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + `/classeProfe/${idPropietari}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((response) => resolve(response))
+    fetch(NODE + `/classeProfe/${idPropietari}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => resolve(response));
   });
 }
 
 export function joinClasse(idClasse, idUsuari) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + `/joinClasse`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          idClasse: idClasse,
-          idUsu: idUsuari,
-        }),
-      }).then((response) => resolve(response));
+    fetch(NODE + `/joinClasse`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idClasse: idClasse,
+        idUsu: idUsuari,
+      }),
+    }).then((response) => resolve(response));
   });
 }
 
 export function createClasse(nombreNuevaClase, idProfe) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + `/crearClasse/`, {
+    fetch(NODE + `/crearClasse/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +83,7 @@ export function createClasse(nombreNuevaClase, idProfe) {
 
 export function addDificultat(nomDificultat, idProfe) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + `/addDificultat/`, {
+    fetch(NODE + `/addDificultat/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,16 +92,25 @@ export function addDificultat(nomDificultat, idProfe) {
         nomDificultat: nomDificultat,
         idProfe: idProfe,
       }),
-    }).then((response) => response.json())
-    .then((data) => {
-      resolve(data.insertId);
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        resolve(data.insertId);
+      });
   });
 }
 
-export function addOperation(num1Min, num1Max, operador, num2Min, num2Max, idDificultat, nivell) {
+export function addOperation(
+  num1Min,
+  num1Max,
+  operador,
+  num2Min,
+  num2Max,
+  idDificultat,
+  nivell
+) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + `/addOperation/`, {
+    fetch(NODE + `/addOperation/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -113,16 +124,17 @@ export function addOperation(num1Min, num1Max, operador, num2Min, num2Max, idDif
         idDificultat: idDificultat,
         nivell: nivell,
       }),
-    }).then((response) => response.json())
-    .then((data) => {
-      resolve(data.insertId);
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        resolve(data.insertId);
+      });
   });
 }
 
 export function editClasse(classeEditar) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + `/editarClasse/`, {
+    fetch(NODE + `/editarClasse/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -137,7 +149,7 @@ export function editClasse(classeEditar) {
 
 export function deleteClasse(classeEditar) {
   return new Promise((resolve, reject) => {
-    fetch(import.meta.env.VITE_NODE_ROUTE + `/eliminarClasse/`, {
+    fetch(NODE + `/eliminarClasse/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -149,15 +161,13 @@ export function deleteClasse(classeEditar) {
   });
 }
 
-export function getDificultatsFetch(idProfe){  
+export function getDificultatsFetch(idProfe) {
   return new Promise((resolve, reject) => {
-    
-    fetch(import.meta.env.VITE_NODE_ROUTE + `/getDificultats/?idProfe=${idProfe}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((response) => resolve(response))
+    fetch(NODE + `/getDificultats/?idProfe=${idProfe}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => resolve(response));
   });
 }

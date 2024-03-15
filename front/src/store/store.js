@@ -1,24 +1,24 @@
 import { createStore } from "zustand/vanilla";
 import { persist } from "zustand/middleware";
 
-const useCountStore = createStore(
+const useUserStore = createStore(
   persist(
     (set) => ({
       usuari: {
-        nom: "Pepito",
-        cognom: "Grillo",
-        email: "pepito@gmail.com",
+        nom: "",
+        cognom: "",
+        email: "",
         id: null,
         avatar: 0,
         classe: '',
       },
     }),
     {
-      name: 'countStore', // nombre único para el almacenamiento local
+      name: 'userStore', // nombre único para el almacenamiento local
     }
   )
 );
 
-export const { getState, setState, subscribe } = useCountStore;
+export const { getState, setState, subscribe } = useUserStore;
 
-export default useCountStore;
+export default useUserStore;

@@ -181,7 +181,7 @@ app.post("/login", async (req, res) => {
 
 //ruta para registrar un usuario
 app.post("/register", async (req, res) => {
-  await register(req.body.email, req.body.password, req.body.nom, req.body.cognom)
+  await register(req.body.email, req.body.password, req.body.nom)
     .then((data) => {
       res.send(data);
     })

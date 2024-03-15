@@ -1,26 +1,34 @@
 <template>
-  <div class="h-screen flex justify-center bg-[#add8e6]">
+  <div
+    class="h-screen flex justify-center bg-[radial-gradient(rgba(173,216,230)_30%,rgba(81,180,213)_100%)]"
+  >
     <div class="flex flex-col items-center justify-center gap-4">
       <img
         src="../assets/MathBattleLogo.png"
         alt="Math Battle Logo"
         class="logo drop-shadow-xl w-3/4 aspect-auto"
       />
-      <a :href="state.usuari.id == null ? '/login' : '/join'">
+      <a :href="goTo">
         <button class="button-landing">COMENÇAR</button>
       </a>
     </div>
   </div>
 </template>
+<script setup>
+import { getState, setState, subscribe } from "../store/store.js";
+</script>
 
 <script>
-import { getState, setState, subscribe } from "../store/store.js";
-
 export default {
   data() {
     return {
       state: getState(),
     };
+  },
+  computed: {
+    goTo() {
+      return this.state.usuari.id == null ? '/login' : '/join';
+    },
   },
 };
 </script>
