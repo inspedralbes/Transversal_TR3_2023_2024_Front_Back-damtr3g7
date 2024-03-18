@@ -14,7 +14,7 @@ const useUserStore = createStore(
       },
     }),
     {
-      name: 'userStore', // nombre único para el almacenamiento local
+      name: 'userStore',
     }
   )
 );
