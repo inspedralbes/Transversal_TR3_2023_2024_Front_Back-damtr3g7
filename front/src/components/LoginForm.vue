@@ -2,76 +2,74 @@
   <div
     class="h-screen flex items-center justify-center bg-[radial-gradient(rgba(173,216,230)_30%,rgba(81,180,213)_100%)]"
   >
-    <div class="flex justify-center items-center bg-white">
-      <div divs="6" class="pl-10 py-10">
+    <div class="flex justify-center bg-white rounded-2xl shadow-lg">
+      <div divs="6" class="p-10 bg-image rounded-l-2xl w-full">
         <h2 class="my-2 text-xl text-center">Registra't</h2>
-        <form @submit.prevent="register" class="mr-6">
-          <div class="name-field">
-            <input
-              model="emailRegistration.name"
-              :rules="emailRegistration.nameRules"
-              label="Nom"
-              type="name"
-              class="pr-6 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              required
-            />
+        <form @submit.prevent="register">
+          <div class="flex flex-wrap -mx-3 mb-3">
+            <div class="w-full md:w-1/2 px-3 md:mb-0">
+              <input
+                model="emailRegistration.name"
+                :rules="emailRegistration.nameRules"
+                placeholder="Nom d'usuari"
+                type="name"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
+              />
+            </div>
+            <div class="w-full md:w-1/2 px-3 md:mb-0">
+              <input
+                model="emailRegistration.email"
+                :rules="emailRegistration.emailRules"
+                placeholder="Email"
+                type="email"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
+              />
+            </div>
           </div>
-          <input
-            model="emailRegistration.email"
-            :rules="emailRegistration.emailRules"
-            label="Email*"
-            type="email"
-            required
-          />
 
           <input
             model="emailRegistration.password"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="emailRegistration.passwordRules"
-            :type="show1 ? 'text' : 'password'"
-            name="input-10-1"
-            label="Contrassenya*"
-            @click:append="show1 = !show1"
+            placeholder="Contrassenya"
+            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
-          <div class="name-field">
-            <checkbox
-              id="profeRegistro"
-              type="checkbox"
-              label="Soc professor/a"
-            ></checkbox>
-          </div>
-          <button id="btnSubmit" type="submit" divor="primary">
+          <button
+            id="btnSubmit"
+            type="submit"
+            class="bg-sky-400 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded transition-colors"
+          >
             Registra't
           </button>
         </form>
       </div>
-      <div divs="6" class="container-right pr-10 py-10">
-        <h2 class="my-2 ml-6 text-center">Inicia sessió</h2>
+      <div divs="6" class="p-10 rounded-2xl w-full">
+        <h2 class="my-2 text-center text-xl">Inicia sessió</h2>
         <form @submit.prevent="login" class="ml-6">
           <input
             v-model="usernameLogin.email"
             :rules="emailRegistration.emailRules"
-            label="Email*"
+            placeholder="Email"
             type="email"
+            class="pr-6 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
           <input
             v-model="usernameLogin.password"
-            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="emailRegistration.passwordRules"
-            :type="show2 ? 'text' : 'password'"
             name="input-10-1"
-            label="Contrassenya*"
-            @click:append="show2 = !show2"
+            placeholder="Contrassenya*"
+            class="pr-6 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
-          <checkbox
-            type="checkbox"
-            id="profeLogin"
-            label="Soc professor/a"
-          ></checkbox>
-          <button type="submit" divor="primary">Inicia sessió</button>
+          <button
+            type="submit"
+            class="bg-sky-400 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded transition-colors"
+          >
+            Inicia sessió
+          </button>
         </form>
       </div>
     </div>
@@ -147,18 +145,20 @@ export default {
       if (data.err) {
         console.log(data.err);
       } else {
-        setState({usuari: { 
+        setState({
+          usuari: {
             nom: this.emailRegistration.name,
             email: this.emailRegistration.email,
-            id: data.userData.insertId
-        }});
+            id: data.userData.insertId,
+          },
+        });
         this.$router.push(
           this.emailRegistration.isAdmin ? "/classes" : "/join"
         );
       }
     },
     async login() {
-      this.usernameLogin.admin = document.getElementById("profeLogin").checked;
+      //this.usernameLogin.admin = document.getElementById("profeLogin").checked;
 
       console.log(this.usernameLogin);
       let data = await login(this.usernameLogin);
@@ -168,14 +168,16 @@ export default {
           "L'usuari o la contrasenya no són correctes o no existeixen"
         );
       } else {
-        setState({usuari: { 
+        setState({
+          usuari: {
             nom: data.userData.nom,
             cognom: data.userData.cognom,
             email: data.userData.correu,
-            id: data.userData.idUsu
-        }});
+            id: data.userData.idUsu,
+          },
+        });
         console.log(getState());
-        //window.location.href = this.usernameLogin.admin ? "/classes" : "/join";
+        window.location.href = this.usernameLogin.admin ? "/classes" : "/join";
       }
     },
   },
@@ -200,9 +202,7 @@ export default {
   align-items: center;
 }
 
-.container-right {
-  /* background-divor: #72BAE8; */
-  width: 100%;
+.bg-image {
   background-image: url("../assets/Background.png");
 }
-</style>setState, 
+</style>

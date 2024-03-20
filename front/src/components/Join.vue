@@ -176,10 +176,10 @@ export default {
 </script>
 
 <template>
-  <div class="h-screen flex justify-center bg-[#add8e6]">
+  <div class="h-screen flex justify-center bg-[radial-gradient(rgba(173,216,230)_30%,rgba(81,180,213)_100%)]">
     <div class="flex flex-col items-center justify-center gap-4">
       <div class="p-10 bg-gray-100 shadow-xl rounded-2xl">
-        <h1 class="text-4xl font-bold mb-6 text-center">UNEIX-TE</h1>
+        <h1 class="text-5xl font-bold mb-6 text-center">UNEIX-TE</h1>
         <form @submit.prevent>
           <div class="flex my-3">
             <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
@@ -266,7 +266,7 @@ input[type="number"] {
   background-position: center center;
   font-size: 17px;
   padding: 0.6em 1.5em;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 2.5px;
   transition: background-position 0.15s ease-in-out;
 }
