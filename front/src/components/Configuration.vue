@@ -2,7 +2,7 @@
     <div class="div-gear">
         <div class="absolute top-0 right-0 mt-8 md:mr-12 mr-3">
             <div>
-                <button v-on:click="() => { dialog = !dialog }"
+                <button v-on:click="() => { dialog = !dialog; editMenu = false }"
                     class="text-slate-600 hover:text-slate-800 transition-all float-right" variant="text" icon=""
                     size="large">
                     <span class="icon-[material-symbols--settings] size-8"></span>
