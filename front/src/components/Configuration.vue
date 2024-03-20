@@ -2,24 +2,21 @@
     <div class="div-gear">
         <div class="absolute top-0 right-0 mt-8 md:mr-12 mr-3">
             <div>
-                <button v-on:click="dialog = !dialog"
+                <button v-on:click="() => { dialog = !dialog }"
                     class="text-slate-600 hover:text-slate-800 transition-all float-right" variant="text" icon=""
                     size="large">
                     <span class="icon-[material-symbols--settings] size-8"></span>
                 </button>
-                <div v-if="dialog" activator="top-right-svg">
+                <div v-if="dialog" key="1" activator="top-right-svg">
                     <div class="fixed inset-0 bg-gray-900 opacity-25 z-10" v-on:click="dialog = !dialog"></div>
                     <div class="relative bg-white rounded-xl shadow-xl pt-8 pb-6 px-4 z-50 top-10">
-                        <div class="rounded-xl flex border border-slate-200 mt-5 py-3 px-1">
-                            <!-- <div class="flex items-center">
-                                <img :src="getAvatarUrl(avatar)" alt="Avatar" class="w-16 h-16 rounded-full mr-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-700" @click.prevent="openAvatarModal">
-                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        Edit icon SVG 
-                                    </svg>
-                                </a>
-                            </div> -->
+                        <div class="rounded-xl flex border border-slate-200 mt-5 py-3 px-1 w-fit ml-auto">
+                            <div class="absolute top-0 right-0">
+                                <button
+                                    class="mr-5 mt-5 border-slate-200 border rounded-md size-5 flex items-center justify-center"
+                                    v-on:click="dialog = !dialog"><span
+                                        class="icon-[material-symbols--close]"></span></button>
+                            </div>
                             <div class="flex items-center justify-center mx-3 ">
                                 <img :src="getAvatarUrl(avatar)" alt="Avatar"
                                     class="size-20 rounded-full bg-red-100 border-slate-300 border">
@@ -29,39 +26,70 @@
                                 <p class="text-gray-400">{{ email }}</p>
                             </div>
                             <div class="flex flex-col items-center justify-center mx-3">
-                                <a href="/"
+                                <button
                                     class="bg-blue-500 text-white hover:bg-blue-600 rounded-md mb-1 size-7 flex items-center justify-center"
-                                    @click="logout">
+                                    @click="() => { editMenu = !editMenu }">
                                     <span class="icon-[tdesign--edit-2] size-5"></span>
-                                </a>
+                                </button>
                                 <a href="/"
                                     class="bg-red-500 text-white hover:bg-red-600 rounded-md size-7 flex items-center justify-center"
-                                    @click="logout">
+                                    @click="logout()">
                                     <span class="icon-[material-symbols--logout] size-5"></span>
                                 </a>
                             </div>
                         </div>
-                        <div class="grid grid-cols-1 gap-y-4">
-                            <div>
-                                <input v-if="password1" :type="show1 ? 'text' : 'password'" name="password1"
-                                    placeholder="Contrassenya"
-                                    class="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-blue-500">
-                                <input v-if="password2" :type="show2 ? 'text' : 'password'" name="password2"
-                                    placeholder="Confirmar contrassenya"
-                                    class="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-blue-500">
-                                <!-- <div class="error-message">{{ errorMessage }}</div> -->
+                        <div v-show="editMenu" class="rounded-xl flex border border-slate-200 mt-5 py-3 px-1">
+                            <div class="container">
+                                <div class="flex p-2">
+                                    <p><b>Nom:</b></p>
+                                    <div type="name" class="ml-2" variant="solo">{{ name }}</div>
+                                </div>
+                                <div class="flex p-2">
+                                    <p><b>Cognom:</b></p>
+                                    <div type="name" class="ml-2" variant="solo">{{ surname }}
+                                    </div>
+                                </div>
+                                <div class="flex p-2">
+                                    <p><b>Correu:</b></p>
+                                    <div type="name" class="ml-2" variant="solo">{{ email }}
+                                    </div>
+                                </div>
+                                <div class="p-4 w-fit rounded-xl border border-slate-200 mx-auto my-3">
+                                    <p><b>Cambiar Contraseña</b></p>
+                                    <div class="flex mt-2">
+                                        <input v-model="password1" :type="show1 ? 'text' : 'password'" name="password1"
+                                            placeholder="Contrassenya"
+                                            class="border border-gray-300 rounded-md mr-2 pl-2" />
+                                        <button @click="show1 = !show1"
+                                            class="bg-blue-500 hover:bg-blue-700 transition-colors duration-300 ease-in-out rounded-md flex items-center justify-center size-6">
+                                            <span class="icon-[mdi--eye] size-4 text-white"
+                                                :class="!show1 ? 'icon-[mdi--eye]' : 'icon-[mdi--eye-off]'"></span>
+                                        </button>
+                                    </div>
+                                    <div class="flex mt-1">
+                                        <input v-model="password2" :type="show2 ? 'text' : 'password'" name="password2"
+                                            placeholder="Confirmar contrassenya"
+                                            class="border border-gray-300 rounded-md mr-2 pl-2" />
+                                        <button @click="show2 = !show2"
+                                            class="bg-blue-500 hover:bg-blue-700 transition-colors duration-300 ease-in-out rounded-md flex items-center justify-center size-6">
+                                            <span class="size-4 text-white"
+                                                :class="!show2 ? 'icon-[mdi--eye]' : 'icon-[mdi--eye-off]'"></span>
+                                        </button>
+                                    </div>
+                                    <div class="mt-3 flex justify-between">
+                                        <button
+                                            class="bg-red-500 hover:bg-red-700 transition-colors duration-300 ease-in-out rounded-md flex items-center justify-center py-1 px-2 text-white ml-3"
+                                            @click="() => { editMenu = false }">Cancelar</button>
+                                        <button
+                                            class="bg-blue-500 hover:bg-blue-700 transition-colors duration-300 ease-in-out rounded-md flex items-center justify-center py-1 px-2 text-white mr-3"
+                                            @click="checkPassword()">Guardar</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="absolute top-0 right-0">
-                            <button
-                                class="mr-5 mt-5 border-slate-200 border rounded-md size-5 flex items-center justify-center"
-                                v-on:click="dialog = !dialog"><span
-                                    class="icon-[material-symbols--close]"></span></button>
                         </div>
                     </div>
                 </div>
-
-                <div v-if="avatarModal" max-width="600px">
+                <div v-show="avatarModal" key="2" max-width="600px">
                     <div>
                         <div class="headline">
                             <p><b>Escull un avatar</b></p>
@@ -72,7 +100,7 @@
                         </button>
                         <div>
                             <div justify="center">
-                                <div v-for="avatarId in avatarIds" :key="avatarId" cols="12" sm="6" md="4" lg="3">
+                                <div v-for="avatarId in avatarIds" :key="avatarId" md="4" lg="3">
                                     <div class="mx-auto" size="120" v-on:click="handleAvatarClick(avatarId)"
                                         @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
                                         <img :src="getAvatarUrl(avatarId)" alt="Avatar"
@@ -109,6 +137,7 @@ export default {
             avatar: null,
             show1: false,
             show2: false,
+            editMenu: false,
             // rules: {
             //     required: value => !!value || 'Required.',
             //     min: v => v.length >= 8 || 'Min 8 characters',
@@ -241,12 +270,6 @@ export default {
     margin: 15px;
 }
 
-.buttons {
-    background-color: white;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
 .card {
     background-color: #5CBBF6;
     width: 600px;
@@ -262,7 +285,7 @@ export default {
     position: relative;
 }
 
-.modal-row {
+. {
     margin-bottom: -15px;
     margin-top: -10px;
 }
