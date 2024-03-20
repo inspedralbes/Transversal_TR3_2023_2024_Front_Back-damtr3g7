@@ -1,7 +1,9 @@
+<script setup>
+import { getState } from "../store/store.js";
+</script>
 <script>
 import { joinClasse } from "../services/communicationManager";
 import { socket, state } from "../services/socket";
-// import { useAppStore } from "../store/app.js";
 
 export default {
   data() {
@@ -9,7 +11,6 @@ export default {
       errorCode: false,
       errorText: "",
       proveSala: false,
-      // store: useAppStore(),
       codi: "",
     };
   },
@@ -21,11 +22,11 @@ export default {
       for (let i = 0; i < inputs.length; i++) {
         this.codi += inputs[i].value.toString();
       }
-      // this.store.usuari.classe = "";
+      getState().usuari.classe = "";
       socket.emit("joinSala", {
         codi: this.codi,
-        // username: this.store.usuari.nom,
-        // idAvatar: this.store.usuari.avatar,
+        username: getState().usuari.nom,
+        idAvatar: getState().usuari.avatar,
       });
     },
     async pasteCode() {
@@ -61,7 +62,7 @@ export default {
         this.proveSala = false;
         state.joinedSala = null;
       } else if (nuevoValor != null && nuevoValor != false && this.codi != "") {
-        // await joinClasse(this.setSala.id_classe, this.store.usuari.id);
+        await joinClasse(this.setSala.id_classe, getState().usuari.id);
         this.$router.push('/sala');
       }
       this.codi = "";
@@ -73,7 +74,7 @@ export default {
     },
   },
   mounted() {
-    // this.store.usuari.id == null ? this.$router.push("/inici") : null;
+    getState().usuari.id == null ? this.$router.push("/inici") : null;
     const form = document.querySelector("form");
     const inputs = form.querySelectorAll("input");
     const KEYBOARDS = {

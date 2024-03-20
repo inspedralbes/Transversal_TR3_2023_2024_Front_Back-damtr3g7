@@ -1,104 +1,98 @@
 <template>
     <div class="div-gear">
-        <div class="top-right-svg">
-            <button @click="dialog = !dialog">
-                <v-btn variant="text" icon="" size="large">
-                    <v-icon icon="mdi-account" size="x-large" color="white" variant="text"></v-icon>
-                </v-btn>
-                <v-dialog v-model="dialog" activator="top-right-svg" width="auto">
-                    <v-card class="card rounded-xl">
-                        <v-card-text>
-                            <v-container>
-                                <v-row>
-                                    <v-col class="modal-row" cols="12">
-                                        <div class="design-avatar">
-                                            <img :src="getAvatarUrl(this.avatar)" alt="Avatar" style="width:90px;">
-                                            <a href="#" @click.prevent="openAvatarModal"><svg width="30px" height="30px"
-                                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g id="Edit / Edit_Pencil_Line_01">
-                                                        <path id="Vector"
-                                                            d="M4 20.0001H20M4 20.0001V16.0001L12 8.00012M4 20.0001L8 20.0001L16 12.0001M12 8.00012L14.8686 5.13146L14.8704 5.12976C15.2652 4.73488 15.463 4.53709 15.691 4.46301C15.8919 4.39775 16.1082 4.39775 16.3091 4.46301C16.5369 4.53704 16.7345 4.7346 17.1288 5.12892L18.8686 6.86872C19.2646 7.26474 19.4627 7.46284 19.5369 7.69117C19.6022 7.89201 19.6021 8.10835 19.5369 8.3092C19.4628 8.53736 19.265 8.73516 18.8695 9.13061L18.8686 9.13146L16 12.0001M12 8.00012L16 12.0001"
-                                                            stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                </svg>
-                                            </a>
-                                            <a class="logOut" href="/" @click="logout()">
-                                                <svg width="30px" viewBox="0 0 64.00 64.00"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ff2414"
-                                                    stroke-width="4.928">
-                                                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <g id="SVGRepo_iconCarrier">
-                                                        <polyline points="40 44 40 56 8 56 8 8 40 8 40 20" />
-                                                        <polyline points="48 40 56 32 48 24" />
-                                                        <line x1="28" y1="32" x2="56" y2="32" />
-                                                    </g>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </v-col>
-                                    <v-col class="modal-row" cols="12" sm="6">
-                                        <p><b>Nom</b></p>
-                                        <v-text-field type="name" variant="solo" disabled>{{ this.name }}</v-text-field>
-                                    </v-col>
-                                    <v-col class="modal-row" cols="12" sm="6">
-                                        <p><b>Cognom</b></p>
-                                        <v-text-field type="name" variant="solo" disabled>{{ this.surname }}</v-text-field>
-                                    </v-col>
-                                    <v-col class="modal-row" cols="12">
-                                        <p><b>Correu</b></p>
-                                        <v-text-field type="name" variant="solo" disabled>{{ this.email }}</v-text-field>
-                                    </v-col>
-                                    <v-col class="modal-row" cols="12">
-                                        <v-text-field v-model="password1" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                                            :type="show1 ? 'text' : 'password'" name="password1" label="Contrassenya"
-                                            @click:append="show1 = !show1"></v-text-field>
-                                        <v-text-field v-model="password2" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                                            :type="show2 ? 'text' : 'password'" name="password2"
-                                            label="Confirmar contrassenya" @click:append="show2 = !show2"></v-text-field>
-                                        <!-- <div class="error-message">{{ errorMessage }}</div> -->
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue-darken-1 buttons" variant="text" @click="dialog = false">Tancar</v-btn>
-                            <v-btn color="blue-darken-1 buttons" variant="text" @click="checkPassword()">Guardar</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
+        <div class="absolute top-0 right-0 mt-8 md:mr-12 mr-3">
+            <div>
+                <button v-on:click="dialog = !dialog"
+                    class="text-slate-600 hover:text-slate-800 transition-all float-right" variant="text" icon=""
+                    size="large">
+                    <span class="icon-[material-symbols--settings] size-8"></span>
+                </button>
+                <div v-if="dialog" activator="top-right-svg">
+                    <div class="fixed inset-0 bg-gray-900 opacity-25 z-10" v-on:click="dialog = !dialog"></div>
+                    <div class="relative bg-white rounded-xl shadow-xl pt-8 pb-6 px-4 z-50 top-10">
+                        <div class="rounded-xl flex border border-slate-200 mt-5 py-3 px-1">
+                            <!-- <div class="flex items-center">
+                                <img :src="getAvatarUrl(avatar)" alt="Avatar" class="w-16 h-16 rounded-full mr-4">
+                                <a href="#" class="text-blue-500 hover:text-blue-700" @click.prevent="openAvatarModal">
+                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        Edit icon SVG 
+                                    </svg>
+                                </a>
+                            </div> -->
+                            <div class="flex items-center justify-center mx-3 ">
+                                <img :src="getAvatarUrl(avatar)" alt="Avatar"
+                                    class="size-20 rounded-full bg-red-100 border-slate-300 border">
+                            </div>
+                            <div class="flex flex-col justify-center mx-3">
+                                <h1 class="text-gray-700">{{ name }} {{ surname }}</h1>
+                                <p class="text-gray-400">{{ email }}</p>
+                            </div>
+                            <div class="flex flex-col items-center justify-center mx-3">
+                                <a href="/"
+                                    class="bg-blue-500 text-white hover:bg-blue-600 rounded-md mb-1 size-7 flex items-center justify-center"
+                                    @click="logout">
+                                    <span class="icon-[tdesign--edit-2] size-5"></span>
+                                </a>
+                                <a href="/"
+                                    class="bg-red-500 text-white hover:bg-red-600 rounded-md size-7 flex items-center justify-center"
+                                    @click="logout">
+                                    <span class="icon-[material-symbols--logout] size-5"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-y-4">
+                            <div>
+                                <input v-if="password1" :type="show1 ? 'text' : 'password'" name="password1"
+                                    placeholder="Contrassenya"
+                                    class="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-blue-500">
+                                <input v-if="password2" :type="show2 ? 'text' : 'password'" name="password2"
+                                    placeholder="Confirmar contrassenya"
+                                    class="w-full py-2 px-3 rounded border border-gray-300 focus:outline-none focus:border-blue-500">
+                                <!-- <div class="error-message">{{ errorMessage }}</div> -->
+                            </div>
+                        </div>
+                        <div class="absolute top-0 right-0">
+                            <button
+                                class="mr-5 mt-5 border-slate-200 border rounded-md size-5 flex items-center justify-center"
+                                v-on:click="dialog = !dialog"><span
+                                    class="icon-[material-symbols--close]"></span></button>
+                        </div>
+                    </div>
+                </div>
 
-                <v-dialog v-model="avatarModal" max-width="600px">
-                    <v-card>
-                        <v-card-title class="headline">
+                <div v-if="avatarModal" max-width="600px">
+                    <div>
+                        <div class="headline">
                             <p><b>Escull un avatar</b></p>
 
-                        </v-card-title>
-                        <v-btn class="btnCloseAvatar" icon @click="closeAvatarModal">
-                            <v-icon>mdi-close</v-icon>
-                        </v-btn>
-                        <v-card-text>
-                            <v-row justify="center">
-                                <v-col v-for="avatarId in avatarIds" :key="avatarId" cols="12" sm="6" md="4" lg="3">
-                                    <v-avatar class="mx-auto" size="120" @click="handleAvatarClick(avatarId)"
+                        </div>
+                        <button class="btnCloseAvatar" icon v-on:click="closeAvatarModal">
+                            <p>mdi-close</p>
+                        </button>
+                        <div>
+                            <div justify="center">
+                                <div v-for="avatarId in avatarIds" :key="avatarId" cols="12" sm="6" md="4" lg="3">
+                                    <div class="mx-auto" size="120" v-on:click="handleAvatarClick(avatarId)"
                                         @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
-                                        <img :src="getAvatarUrl(avatarId)" alt="Avatar" style="width: 100%; height: 100%;">
-                                    </v-avatar>
-                                </v-col>
-                            </v-row>
-                        </v-card-text>
-                    </v-card>
-                </v-dialog>
-            </button>
+                                        <img :src="getAvatarUrl(avatarId)" alt="Avatar"
+                                            style="width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
+<script setup>
+import { getState, setState } from "../store/store.js";
+</script>
+
 <script>
-// import { useAppStore } from "../store/app.js";
 
 export default {
     data() {
@@ -125,15 +119,14 @@ export default {
 
     methods: {
         logout() {
-
-            // let store = useAppStore();
-            // store.usuari = {
-            //     nom: "",
-            //     cognom: "",
-            //     email: "",
-            //     avatar: null,
-            // };
-
+            setState({
+                usuari: {
+                    nom: "",
+                    cognom: "",
+                    email: "",
+                    avatar: null,
+                }
+            });
         },
         checkPassword() {
             /*  console.log("Dentro")
@@ -172,6 +165,7 @@ export default {
             this.avatarModal = true;
         },
         getAvatarUrl(avatarId) {
+            console.log(avatarId);
             return `https://api.dicebear.com/7.x/big-smile/svg?seed=${avatarId}&scale=80`;
 
         },
@@ -180,8 +174,7 @@ export default {
         },
         handleAvatarClick(avatarId) {
             this.avatar = avatarId;
-            // let store = useAppStore();
-            // store.usuari.avatar = this.avatar;
+            setState({ usuari: { avatar: this.avatar } });
             this.avatarModal = false;
         },
         handleMouseEnter(event) {
@@ -195,10 +188,8 @@ export default {
             event.target.style.cursor = 'default';
         },
         async cambiarContrasena() {
-
             console.log("Dentro")
-            // let store = useAppStore();
-            // let email = store.usuari.email;
+            setState({ usuari: { email: this.email } });
 
             let response = await fetch(import.meta.env.VITE_NODE_ROUTE + "/changePassword", {
                 method: "POST",
@@ -222,18 +213,17 @@ export default {
             }
         }
     }, mounted() {
-        // let store = useAppStore();
-        // this.name = store.usuari.nom;
-        // this.surname = store.usuari.cognom;
-        // this.email = store.usuari.email;
-        // this.avatar = store.usuari.avatar;
+        this.name = getState().usuari.nom;
+        this.surname = getState().usuari.cognom;
+        this.email = getState().usuari.email;
+        this.avatar = getState().usuari.avatar;
     }
 }
 
 </script>
 
 <style scoped>
-.logOut{
+.logOut {
     position: absolute;
     right: 0;
     margin-right: 50px;
@@ -261,22 +251,11 @@ export default {
     background-color: #5CBBF6;
     width: 600px;
     overflow: hidden;
-
-
 }
 
 .design-avatar {
     display: flex;
     align-items: center;
-}
-
-.top-right-svg {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    margin-top: 30px;
-    margin-right: 90px;
 }
 
 .div-gear {
