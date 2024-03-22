@@ -182,12 +182,18 @@ export default {
         <h1 class="text-5xl font-bold mb-6 text-center">UNEIX-TE</h1>
         <form @submit.prevent>
           <div class="flex my-3">
-            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1" class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1" class="block w-12 h-14 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1"
+              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1"
+              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1"
+              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1"
+              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1"
+              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1"
+              class="block w-12 h-14 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
             <div class="paste-btn-container">
               <button class="paste-btn" @click="() => pasteCode()">
                 <svg fill="black" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
@@ -204,7 +210,7 @@ export default {
         </form>
 
         <div class="text-center mt-3 font-bold">
-          <a href="/classes" class="text-blue-500 hover:underline">Crea una sala</a>
+          <a href="/chooseClass" class="text-blue-500 hover:underline">Crea una sala</a>
         </div>
       </div>
     </div>
