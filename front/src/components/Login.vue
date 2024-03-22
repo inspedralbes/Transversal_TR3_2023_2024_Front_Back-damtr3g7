@@ -1,133 +1,188 @@
 <template>
-  <div class="h-screen flex items-center justify-center">
-    <div class="flex justify-center bg-white rounded-2xl shadow-lg">
-      <div divs="6" class="p-10 rounded-l-2xl w-full">
-        <h2 class="my-2 text-center text-3xl font-bold">Inicia sessió</h2>
-        <form @submit.prevent="login" class="ml-6">
-          <input
-            v-model="usernameLogin.email"
-            :rules="emailRegistration.emailRules"
-            placeholder="Email"
-            type="email"
-            class="pr-6 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-          <input
-            v-model="usernameLogin.password"
-            :rules="emailRegistration.passwordRules"
-            name="input-10-1"
-            placeholder="Contrassenya*"
-            class="pr-6 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
+  <div class="h-screen flex flex-col gap-3 items-center justify-center">
+    <div class="flex justify-center bg-white rounded-2xl shadow-lg h-96">
+      <div
+        :class="
+          (!registred
+            ? 'rounded-l-2xl w-[20vw] flex items-center justify-center px-16 bg-[url(/src/assets/Background.png)] '
+            : '') +
+          'rounded-l-2xl w-[20vw] flex items-center justify-center px-16'
+        "
+      >
+        <div :class="registred ? 'hidden duration-700 ease-in-out' : ''">
+          <h1 class="font-bold text-4xl mb-5 text-center">Ja tens compte?</h1>
           <button
-            type="submit"
-            class="bg-sky-400 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded transition-colors"
+            :onclick="() => (registred = !registred)"
+            class="p-2 bg-blue-600 rounded font-bold w-full text-white"
           >
             Inicia sessió
           </button>
-        </form>
-      </div>
-      <div divs="6" class="bg-image bg-[#72BAE8] p-10 rounded-r-2xl w-full">
-        
-        <h2 class="my-2 text-3xl text-center font-bold">Registra't</h2>
-        <form @submit.prevent="register">
-          <div class="flex flex-wrap -mx-3 mb-3">
-            <div class="w-full md:w-1/2 px-3 md:mb-0">
+        </div>
+        <div :class="!registred ? 'hidden duration-700 ease-in-out' : ''">
+          <h2 class="my-2 mb-5 text-4xl text-center w-full font-bold">
+            Inicia sessió
+          </h2>
+          <form @submit.prevent="checkForm('login')" class="grid gap-2">
+            <label>
+              <p class="pl-2 opacity-80">Email</p>
+
               <input
-                model="emailRegistration.name"
-                :rules="emailRegistration.nameRules"
-                placeholder="Nom d'usuari"
-                type="name"
-                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                required
-              />
-            </div>
-            <div class="w-full md:w-1/2 px-3 md:mb-0">
-              <input
-                model="emailRegistration.email"
-                :rules="emailRegistration.emailRules"
+                v-model="loginData.email"
                 placeholder="Email"
                 type="email"
-                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                autocomplete="username"
+                class="w-full block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
+              />
+            </label>
+            <label>
+              <p class="pl-2 opacity-80">Contrasenya</p>
+              <input
+                v-model="loginData.password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Contrassenya"
+                class="w-full block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
+              />
+            </label>
+
+            <button
+              type="submit"
+              class="bg-sky-400 hover:bg-sky-600 text-white font-bold mt-5 py-2 px-4 rounded transition-colors"
+            >
+              Inicia sessió
+            </button>
+          </form>
+        </div>
+      </div>
+      <div
+        :class="
+          (registred ? 'bg-[url(/src/assets/Background.png)]' : '') +
+          ' rounded-r-2xl w-[20vw] flex items-center justify-center px-16'
+        "
+      >
+        <div :class="!registred ? 'hidden duration-700 ease-in-out' : ''">
+          <h1 class="text-center text-4xl font-bold mb-7">
+            Encara no tens compte?
+          </h1>
+          <button
+            :onclick="() => (registred = !registred)"
+            class="p-2 bg-blue-600 rounded font-bold w-full text-white"
+          >
+            Crea't un!
+          </button>
+        </div>
+        <div :class="registred ? 'hidden duration-700 ease-in-out' : ''">
+          <h2 class="my-2 mb-10 text-4xl text-center font-bold">Registra't</h2>
+          <form @submit.prevent="checkForm('register')" class="grid gap-2">
+            <div class="grid grid-cols-2 gap-2">
+              <input
+                v-model="registerData.name"
+                placeholder="Nom d'usuari"
+                type="name"
+                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                required
+              />
+              <input
+                v-model="registerData.email"
+                placeholder="Email"
+                type="email"
+                autocomplete="username"
+                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 required
               />
             </div>
-          </div>
 
-          <input
-            model="emailRegistration.password"
-            :rules="emailRegistration.passwordRules"
-            placeholder="Contrassenya"
-            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            required
-          />
-          <button
-            id="btnSubmit"
-            type="submit"
-            class="bg-sky-400 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded transition-colors"
-          >
-            Registra't
-          </button>
-        </form>
+            <input
+              v-model="registerData.password"
+              placeholder="Contrassenya"
+              type="password"
+              autocomplete="current-password"
+              class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+            <button
+              id="btnSubmit"
+              type="submit"
+              class="bg-sky-400 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded transition-colors"
+            >
+              Registra't
+            </button>
+          </form>
+        </div>
       </div>
+    </div>
+    <div
+      class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-100"
+      role="alert"
+      :class="formErrors != '' ? 'visible' : 'invisible'"
+    >
+    <span class="icon-[material-symbols--info] size-8"></span>
+      <span class="sr-only">Info</span>
+      <div><span class="font-medium">Error!</span> {{ formErrors }}</div>
     </div>
   </div>
 </template>
 
+<script setup>
+import bgImage from "../assets/Background.png";
+</script>
+
 <script>
 import { register, login } from "../services/communicationManager";
-import { getState, setState, subscribe } from "../store/store.js";
+import { getState, setState } from "../store/store.js";
 import party from "party-js";
 
 export default {
   data() {
     return {
-      show1: false,
-      show2: false,
-      emailRegistration: {
+      registred: true,
+      formErrors: "",
+      registerData: {
         name: "",
         email: "",
         password: "",
-        isAdmin: false,
-        nameRules: [
-          (value) => {
-            if (value) return true;
-            return "Aquest camp és obligatori.";
-          },
-          (value) => {
-            if (value?.length <= 10) return true;
-
-            return "El nom ha de ser més curt.";
-          },
-        ],
-        emailRules: [
-          (value) => {
-            if (value) return true;
-
-            return "Aquest camp és obligatori.";
-          },
-          (value) => {
-            if (/.+@.+\..+/.test(value)) return true;
-            return "L'email ha de ser vàlid.";
-          },
-        ],
-
-        passwordRules: [
-          (value) => {
-            if (value) return true;
-            return "Aquest camp és obligatori.";
-          },
-        ],
       },
-      usernameLogin: {
+      loginData: {
         email: "",
         password: "",
-        admin: false,
       },
     };
   },
   methods: {
+    checkForm(loginOrRegister) {
+      let emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+      let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+      if (loginOrRegister == "login") {
+        if (!emailRegex.test(this.loginData.email)) {
+          this.formErrors = "El correo electrónico no es válido";
+          return false;
+        }
+        if (!passwordRegex.test(this.loginData.password)) {
+          this.formErrors =
+            "La contraseña debe tener al menos un número, una letra minúscula, una letra mayúscula y mínimo 8 caracteres";
+          return false;
+        }
+      } else {
+        if (!emailRegex.test(this.registerData.email)) {
+          this.formErrors = "El correo electrónico no es válido";
+          return false;
+        }
+        if (!passwordRegex.test(this.registerData.password)) {
+          this.formErrors =
+            "La contraseña debe tener al menos un número, una letra minúscula, una letra mayúscula y mínimo 8 caracteres";
+          return false;
+        }
+        if (this.registerData.name.trim() === "") {
+          this.formErrors = "El nombre no puede estar vacío";
+          return false;
+        }
+      }
+      this.formErrors = "";
+      return true;
+    },
     lanzarConfeti() {
       const btnSubmit = document.getElementById("btnSubmit");
 
@@ -136,31 +191,26 @@ export default {
       party.sparkles(btnSubmit);
     },
     async register() {
-      this.emailRegistration.isAdmin =
-        document.getElementById("profeRegistro").checked;
-
-      let data = await register(this.emailRegistration);
+      let data = await register(this.registerData);
 
       if (data.err) {
         console.log(data.err);
       } else {
         setState({
           usuari: {
-            nom: this.emailRegistration.name,
-            email: this.emailRegistration.email,
+            nom: this.registerData.name,
+            email: this.registerData.email,
             id: data.userData.insertId,
           },
         });
-        this.$router.push(
-          this.emailRegistration.isAdmin ? "/classes" : "/join"
-        );
+        this.$router.push(this.registerData.isAdmin ? "/classes" : "/join");
       }
     },
     async login() {
-      //this.usernameLogin.admin = document.getElementById("profeLogin").checked;
+      //this.loginData.admin = document.getElementById("profeLogin").checked;
 
-      console.log(this.usernameLogin);
-      let data = await login(this.usernameLogin);
+      console.log(this.loginData);
+      let data = await login(this.loginData);
 
       if (data.err) {
         window.alert(
@@ -176,32 +226,11 @@ export default {
           },
         });
         console.log(getState());
-        window.location.href = this.usernameLogin.admin ? "/classes" : "/join";
+        window.location.href = this.loginData.admin ? "/classes" : "/join";
       }
     },
   },
 };
 </script>
 
-<style scoped>
-.name-field {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.imgFondo {
-  z-index: 1;
-}
-
-.full-container {
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.bg-image {
-  background-image: url("../assets/Background.png");
-}
-</style>
+<style scoped></style>
