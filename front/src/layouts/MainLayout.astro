@@ -1,0 +1,19 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>MathBattle</title>
+		<ViewTransitions />
+	</head>
+	<body class="h-screen bg-[radial-gradient(rgba(173,216,230)_30%,rgba(81,180,213)_100%)]">
+		<slot />
+	</body>
+</html>

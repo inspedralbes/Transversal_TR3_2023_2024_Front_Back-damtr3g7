@@ -176,24 +176,18 @@ export default {
 </script>
 
 <template>
-  <div class="h-screen flex justify-center bg-[radial-gradient(rgba(173,216,230)_30%,rgba(81,180,213)_100%)]">
+  <div class="h-screen flex justify-center">
     <div class="flex flex-col items-center justify-center gap-4">
       <div class="p-10 bg-gray-100 shadow-xl rounded-2xl">
         <h1 class="text-5xl font-bold mb-6 text-center">UNEIX-TE</h1>
         <form @submit.prevent>
           <div class="flex my-3">
-            <input type="text" maxlength="1"
-              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1"
-              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1"
-              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1"
-              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1"
-              class="block w-12 h-14 mr-1 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
-            <input type="text" maxlength="1"
-              class="block w-12 h-14 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95" />
+            <input type="text" maxlength="1" class="input mr-1" />
+            <input type="text" maxlength="1" class="input mr-1" />
+            <input type="text" maxlength="1" class="input mr-1" />
+            <input type="text" maxlength="1" class="input mr-1" />
+            <input type="text" maxlength="1" class="input mr-1" />
+            <input type="text" maxlength="1" class="input" />
             <div class="paste-btn-container">
               <button class="paste-btn" @click="() => pasteCode()">
                 <svg fill="black" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
@@ -220,6 +214,10 @@ export default {
 <style scoped>
 .linkClasses {
   cursor: pointer;
+}
+
+.input {
+  @apply block w-12 h-14 text-center text-lg min-w-0 border border-gray-300 focus:outline-none transition-all duration-300 transform hover:scale-95;
 }
 
 .title {
